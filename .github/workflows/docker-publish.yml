@@ -1,0 +1,97 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+env:
+  # TODO: Change variable to your image's name.
+  RELION_IMAGE_NAME: relion-3.0.8
+  GROMACS_IMAGE_NAME: gromacs-2020
+  LAMMPS_IMAGE_NAME: lammps-2019
+
+  DOCKERHUB_REPO: hpc-app-container
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+
+jobs:
+
+  relion:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file "relion/relion-3.0.8.Dockerfile" --tag $RELION_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u $DOCKERHUB_USER --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$DOCKERHUB_USER/$DOCKERHUB_REPO
+          
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          VERSION=$RELION_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $RELION_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
+  gromacs:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file "gromacs/gromacs-2020.Dockerfile" --tag $GROMACS_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u $DOCKERHUB_USER --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$DOCKERHUB_USER/$DOCKERHUB_REPO
+          
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          VERSION=$GROMACS_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $GROMACS_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+  
+  lammps:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file "lammps/lammps-2019.Dockerfile" --tag $LAMMPS_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u $DOCKERHUB_USER --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$DOCKERHUB_USER/$DOCKERHUB_REPO
+          
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          VERSION=$LAMMPS_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $LAMMPS_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
