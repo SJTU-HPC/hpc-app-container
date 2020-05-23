@@ -20,30 +20,21 @@ env:
 
 jobs:
   relion-test:
-    
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
         run: docker build . --file "relion/relion-3.0.8.Dockerfile" --tag $RELION_IMAGE_NAME
   
   gromacs-test:
-    
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
         run: docker build . --file "gromacs/gromacs-2020.Dockerfile" --tag $GROMACS_IMAGE_NAME
         
   lammps-test:
-    
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
