@@ -2,8 +2,10 @@ name: Docker
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
+      - master
+  pull_request:
+    branches: 
       - master
 
 env:
@@ -17,8 +19,38 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
 
 jobs:
+  relion-test:
+    
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Build image
+        run: docker build . --file "relion/relion-3.0.8.Dockerfile" --tag $RELION_IMAGE_NAME
+  
+  gromacs-test:
+    
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Build image
+        run: docker build . --file "gromacs/gromacs-2020.Dockerfile" --tag $GROMACS_IMAGE_NAME
+        
+  lammps-test:
+    
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Build image
+        run: docker build . --file "lammps/lammps-2019.Dockerfile" --tag $LAMMPS_IMAGE_NAME
 
   relion:
+    needs: relion-test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -45,6 +77,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
 
   gromacs:
+    needs: gromacs-test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -71,6 +104,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
   
   lammps:
+    needs: lammps-test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
