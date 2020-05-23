@@ -24,10 +24,10 @@ ENV LD_LIBRARY_PATH=/opt/relion/lib:$LD_LIBRARY_PATH \
 FROM chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0
 RUN yum install -y \
         which \
-        libtiff-devel \
-        fltk-devel \
+        libtiff \
+        fltk \
         fltk-fluid \
-        fftw-devel && \
+        fftw && \
     rm -rf /var/cache/yum/*
 
 # RELION version 3.0.8
