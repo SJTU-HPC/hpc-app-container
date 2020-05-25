@@ -1,3 +1,7 @@
+#===========================#
+# multi-stage: build
+#===========================#
+
 FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0 AS build
 
 # cmake 3.16.3
@@ -21,7 +25,7 @@ RUN yum install -y \
         which && \
     rm -rf /var/cache/yum/*
 
-RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/patch_19Sep2019.tar.gz && \
+RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/stable_7Aug2019.tar.gz && \
     mkdir -p /var/tmp && tar -x -f /var/tmp/patch_19Sep2019.tar.gz -C /var/tmp -z && \
     cd /var/tmp/lammps-patch_19Sep2019/cmake && \
     sed -i 's/^cuda_args=""/cuda_args="--cudart shared"/g' /var/tmp/lammps-patch_19Sep2019/lib/kokkos/bin/nvcc_wrapper && \
@@ -29,6 +33,11 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
     cmake --build /var/tmp/lammps-patch_19Sep2019/build-Volta70 --target all -- -j$(nproc) && \
     cmake --build /var/tmp/lammps-patch_19Sep2019/build-Volta70 --target install -- -j$(nproc) && \
     rm -rf /var/tmp/lammps-patch_19Sep2019/cmake /var/tmp/patch_19Sep2019.tar.gz /var/tmp/lammps-patch_19Sep2019/build-Volta70
+
+
+#===========================#
+# multi-stage: install
+#===========================#
 
 FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
 

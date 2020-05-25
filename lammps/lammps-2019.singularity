@@ -29,7 +29,7 @@ Stage: build
         which
     rm -rf /var/cache/yum/*
 %post
-    mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/patch_19Sep2019.tar.gz
+    mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/stable_7Aug2019.tar.gz
     mkdir -p /var/tmp && tar -x -f /var/tmp/patch_19Sep2019.tar.gz -C /var/tmp -z
     cd /var/tmp/lammps-patch_19Sep2019/cmake
     sed -i 's/^cuda_args=""/cuda_args="--cudart shared"/g' /var/tmp/lammps-patch_19Sep2019/lib/kokkos/bin/nvcc_wrapper

@@ -2,8 +2,6 @@
 
 [![Join the chat at https://gitter.im/hpc-app-container/community](https://badges.gitter.im/hpc-app-container/community.svg)](https://gitter.im/hpc-app-container/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![Docker](https://github.com/Shenggan/hpc-app-container/workflows/Docker/badge.svg?branch=master)
-
 HPC Container Collection for [SJTU Center for High Performance Computing](https://docs.hpc.sjtu.edu.cn/).
 
 Docker Hub Page: [https://hub.docker.com/repository/docker/chengshenggan/hpc-app-container](https://hub.docker.com/repository/docker/chengshenggan/hpc-app-container)
@@ -11,6 +9,8 @@ Docker Hub Page: [https://hub.docker.com/repository/docker/chengshenggan/hpc-app
 ## Application List
 
 ### Relion
+
+![Relion](https://github.com/Shenggan/hpc-app-container/workflows/Relion/badge.svg?branch=master)
 
 Main Page: [http://www2.mrc-lmb.cam.ac.uk/relion](http://www2.mrc-lmb.cam.ac.uk/relion)
 
@@ -29,6 +29,8 @@ singularity pull docker://chengshenggan/hpc-app-container:relion-3.0.8
 
 ### Gromacs
 
+![Gromacs](https://github.com/Shenggan/hpc-app-container/workflows/Gromacs/badge.svg?branch=master)
+
 Main Page: [http://www.gromacs.org/](http://www.gromacs.org/)
 
 Version: [2020](http://manual.gromacs.org/2020/download.html)
@@ -45,6 +47,8 @@ singularity pull docker://chengshenggan/hpc-app-container:gromacs-2020
 ```
 
 ### Lammps
+
+![Lammps](https://github.com/Shenggan/hpc-app-container/workflows/Lammps/badge.svg?branch=master)
 
 Main Page: [https://lammps.sandia.gov/](https://lammps.sandia.gov/)
 
