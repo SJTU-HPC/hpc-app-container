@@ -1,3 +1,7 @@
+#===========================#
+# multi-stage: build
+#===========================#
+
 FROM chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0 AS build
 
 # RELION version 3.0.8
@@ -20,6 +24,10 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
 ENV LD_LIBRARY_PATH=/opt/relion/lib:$LD_LIBRARY_PATH \
     PATH=/opt/relion/bin:$PATH
 
+
+#===========================#
+# multi-stage: install
+#===========================#
 
 FROM chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0
 RUN yum install -y \

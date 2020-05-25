@@ -1,3 +1,6 @@
+#===========================#
+# multi-stage: build
+#===========================#
 FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0 AS build
 
 # cmake 3.16.3
@@ -24,6 +27,10 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp http://f
 ENV LD_LIBRARY_PATH=/opt/gromacs/lib64:$LD_LIBRARY_PATH \
     PATH=/opt/gromacs/bin:$PATH
 
+
+#===========================#
+# multi-stage: install
+#===========================#
 
 FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
 
