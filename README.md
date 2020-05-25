@@ -52,7 +52,7 @@ singularity pull docker://chengshenggan/hpc-app-container:gromacs-2020
 
 Main Page: [https://lammps.sandia.gov/](https://lammps.sandia.gov/)
 
-Version: [patch_19Sep2019](https://github.com/lammps/lammps/releases/tag/patch_19Sep2019)
+Version: [stable_7Aug2019](https://github.com/lammps/lammps/releases/tag/stable_7Aug2019)
 
 Base Image: [chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.cuda-10.2-openmpi4.0.Dockerfile)
 
