@@ -64,3 +64,22 @@ docker pull chengshenggan/hpc-app-container:lammps-2019
 # for singularity user
 singularity pull docker://chengshenggan/hpc-app-container:lammps-2019
 ```
+
+### OpenFOAM
+
+![OpenFOAM](https://github.com/Shenggan/hpc-app-container/workflows/OpenFOAM/badge.svg?branch=master)
+
+Main Page: [https://openfoam.org/](https://openfoam.org/)
+
+Version: [v8](https://openfoam.org/version/8)
+
+Base Image: [chengshenggan/hpc-base-container:ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/cascadelake-opa/openmpi-4.0.Dockerfile)
+
+Usage:
+
+```shell
+# for docker user
+docker pull chengshenggan/hpc-app-container:openfoam-v8
+# for singularity user
+singularity pull docker://chengshenggan/hpc-app-container:openfoam-v8
+```

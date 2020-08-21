@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:gcc-8.ompi-4.0 AS build
+FROM chengshenggan/hpc-base-container:ompi-4.0 AS build
 
 # cmake 3.16.3
 RUN yum install -y \
@@ -36,14 +36,14 @@ RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/8 | tar 
     sed -i 's/unalias wmRefresh/#unalias wmRefresh/' etc/config.sh/aliases && \
     source /opt/rh/devtoolset-8/enable && \
     source etc/bashrc && \
-    ./Allwmake -j$(nproc)
+    ./Allwmake
 
 
 #===========================#
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:gcc-8.ompi-4.0
+FROM chengshenggan/hpc-base-container:ompi-4.0
 RUN yum install -y \
         zlib-devel \
         boost-system \

@@ -1,4 +1,4 @@
-name: openfoam
+name: OpenFOAM
 
 on:
   push:
