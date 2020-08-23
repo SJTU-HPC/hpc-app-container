@@ -34,7 +34,6 @@ RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/8 | tar 
     sed -i 's/alias wmUnset/#alias wmUnset/' etc/config.sh/aliases && \
     sed -i '77s/else/#else/' etc/config.sh/aliases && \
     sed -i 's/unalias wmRefresh/#unalias wmRefresh/' etc/config.sh/aliases && \
-    source /opt/rh/devtoolset-8/enable && \
     source etc/bashrc && \
     ./Allwmake
 
@@ -55,4 +54,3 @@ RUN yum install -y \
 # OpenFOAM v8
 COPY --from=build /opt/OpenFOAM-8 /opt/OpenFOAM-8
 COPY --from=build /opt/ThirdParty-8/platforms /opt/ThirdParty-8/platforms
-ENTRYPOINT ["sh", "-c", ". /opt/rh/devtoolset-8/enable && \"$@\"", "-s"]

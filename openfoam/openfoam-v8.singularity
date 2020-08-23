@@ -39,7 +39,6 @@ Stage: build
     sed -i 's/alias wmUnset/#alias wmUnset/' etc/config.sh/aliases
     sed -i '77s/else/#else/' etc/config.sh/aliases
     sed -i 's/unalias wmRefresh/#unalias wmRefresh/' etc/config.sh/aliases
-    source /opt/rh/devtoolset-8/enable
     source etc/bashrc
     ./Allwmake -j$(nproc)
 
