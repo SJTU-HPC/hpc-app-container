@@ -20,16 +20,16 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
 
 jobs:
-  relion-test:
+  test:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
         run: docker build . --file "relion/relion-3.0.8.Dockerfile" --tag $RELION_IMAGE_NAME
 
-  relion:
-    needs: relion-test
-
+  deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 

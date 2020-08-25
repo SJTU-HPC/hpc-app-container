@@ -49,8 +49,12 @@ RUN yum install -y \
         boost-thread \
         readline-devel \
         ncurses-devel && \
-    rm -rf /var/cache/yum/*
+    rm -rf /var/cache/yum/* && \
+    /bin/rm /bin/sh && \
+    /bin/ln -s /bin/bash /bin/sh
 
 # OpenFOAM v8
 COPY --from=build /opt/OpenFOAM-8 /opt/OpenFOAM-8
 COPY --from=build /opt/ThirdParty-8/platforms /opt/ThirdParty-8/platforms
+
+ENTRYPOINT [ "sh", "-c", ". /opt/OpenFOAM-8/etc/bashrc && \"$@\"", "-s" ]

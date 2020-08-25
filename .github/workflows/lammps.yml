@@ -20,16 +20,16 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
 
 jobs:        
-  lammps-test:
+  test:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
         run: docker build . --file "lammps/lammps-2019.Dockerfile" --tag $LAMMPS_IMAGE_NAME
   
-  lammps:
-    needs: lammps-test
-
+  deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 

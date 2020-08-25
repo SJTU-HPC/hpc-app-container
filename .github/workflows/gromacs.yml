@@ -20,16 +20,16 @@ env:
   DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
 
 jobs:
-  gromacs-test:
+  test:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
     steps:
       - uses: actions/checkout@v2
       - name: Test Build image
         run: docker build . --file "gromacs/gromacs-2020.Dockerfile" --tag $GROMACS_IMAGE_NAME
 
-  gromacs:
-    needs: gromacs-test
-
+  deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
