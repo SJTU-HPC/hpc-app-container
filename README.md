@@ -4,7 +4,7 @@
 
 HPC Container Collection for [SJTU Center for High Performance Computing](https://docs.hpc.sjtu.edu.cn/).
 
-Docker Hub Page: [https://hub.docker.com/repository/docker/chengshenggan/hpc-app-container](https://hub.docker.com/repository/docker/chengshenggan/hpc-app-container)
+Docker Hub Page: [https://hub.docker.com/r/chengshenggan/hpc-app-container](https://hub.docker.com/r/chengshenggan/hpc-app-container)
 
 ## Application List
 
