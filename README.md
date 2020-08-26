@@ -60,9 +60,9 @@ Usage:
 
 ```shell
 # for docker user
-docker pull chengshenggan/hpc-app-container:lammps-2019
+docker pull chengshenggan/hpc-app-container:lammps-2020
 # for singularity user
-singularity pull docker://chengshenggan/hpc-app-container:lammps-2019
+singularity pull docker://chengshenggan/hpc-app-container:lammps-2020
 ```
 
 ### OpenFOAM
