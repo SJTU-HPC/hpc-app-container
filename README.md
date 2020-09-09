@@ -54,15 +54,26 @@ Main Page: [https://lammps.sandia.gov/](https://lammps.sandia.gov/)
 
 Version: [stable_3Mar2020](https://github.com/lammps/lammps/releases/tag/stable_3Mar2020)
 
-Base Image: [chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.cuda-10.2-openmpi4.0.Dockerfile)
+Base Image for GPU: [chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.cuda-10.2.openmpi4.0.Dockerfile)
 
-Usage:
+Base Image for Intel: [chengshenggan/hpc-base-container:gcc-8.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.openmpi4.0.Dockerfile)
+
+Usage for GPU:
 
 ```shell
 # for docker user
-docker pull chengshenggan/hpc-app-container:lammps-2020
+docker pull chengshenggan/hpc-app-container:lammps-gpu-2020
 # for singularity user
-singularity pull docker://chengshenggan/hpc-app-container:lammps-2020
+singularity pull docker://chengshenggan/hpc-app-container:lammps-gpu-2020
+```
+
+Usage for Intel:
+
+```shell
+# for docker user
+docker pull chengshenggan/hpc-app-container:lammps-intel-2020
+# for singularity user
+singularity pull docker://chengshenggan/hpc-app-container:lammps-intel-2020
 ```
 
 ### OpenFOAM
