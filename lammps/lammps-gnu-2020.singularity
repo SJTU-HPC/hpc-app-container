@@ -1,5 +1,5 @@
 BootStrap: docker
-From: chengshenggan/hpc-base-container:intel-2021
+From: chengshenggan/hpc-base-container:gcc-8.ompi-4.0
 Stage: build
 %post
     . /.singularity.d/env/10-docker*.sh
@@ -31,11 +31,9 @@ Stage: build
 %post
     mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/stable_3Mar2020.tar.gz
     mkdir -p /var/tmp && tar -x -f /var/tmp/stable_3Mar2020.tar.gz -C /var/tmp -z
-    cd /var/tmp/lammps-stable_3Mar2020/cmake/presets
-    wget -q -nc --no-check-certificate https://raw.githubusercontent.com/lammps/lammps/master/cmake/presets/intel.cmake
+    cd /var/tmp/lammps-stable_3Mar2020/cmake
     mkdir -p /var/tmp/lammps-stable_3Mar2020/build-Intel && cd /var/tmp/lammps-stable_3Mar2020/build-Intel
     cmake -C /var/tmp/lammps-stable_3Mar2020/cmake/presets/most.cmake \
-        -C /var/tmp/lammps-stable_3Mar2020/cmake/presets/intel.cmake \
         -D CMAKE_INSTALL_PREFIX=/opt/lammps \
         -D CMAKE_BUILD_TYPE=Release \
         -D BUILD_MPI=yes \
@@ -48,7 +46,7 @@ Stage: build
 
 
 BootStrap: docker
-From: chengshenggan/hpc-base-container:intel-2021
+From: chengshenggan/hpc-base-container:gcc-8.ompi-4.0
 %post
     . /.singularity.d/env/10-docker*.sh
 
