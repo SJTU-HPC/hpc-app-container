@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:intel-2021 AS build
+FROM chengshenggan/hpc-base-container:gcc-8.ompi-4.0 AS build
 
 RUN yum install -y \
         epel-release && \
@@ -26,11 +26,9 @@ RUN yum install -y \
 
 RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://github.com/lammps/lammps/archive/stable_3Mar2020.tar.gz && \
     mkdir -p /var/tmp && tar -x -f /var/tmp/stable_3Mar2020.tar.gz -C /var/tmp -z && \
-    cd /var/tmp/lammps-stable_3Mar2020/cmake/presets && \
-    wget -q -nc --no-check-certificate https://raw.githubusercontent.com/lammps/lammps/master/cmake/presets/intel.cmake && \
+    cd /var/tmp/lammps-stable_3Mar2020/cmake && \
     mkdir -p /var/tmp/lammps-stable_3Mar2020/build-Intel && cd /var/tmp/lammps-stable_3Mar2020/build-Intel && \
     cmake -C /var/tmp/lammps-stable_3Mar2020/cmake/presets/most.cmake \
-        -C /var/tmp/lammps-stable_3Mar2020/cmake/presets/intel.cmake \
         -D CMAKE_INSTALL_PREFIX=/opt/lammps \
         -D CMAKE_BUILD_TYPE=Release \
         -D BUILD_MPI=yes \
@@ -46,7 +44,7 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:intel-2021
+FROM chengshenggan/hpc-base-container:gcc-8.ompi-4.0
 
 # LAMMPS version stable_3Mar2020 for Intel Platform
 RUN yum install -y \
