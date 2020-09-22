@@ -16,8 +16,6 @@ Main Page: [http://www2.mrc-lmb.cam.ac.uk/relion](http://www2.mrc-lmb.cam.ac.uk/
 
 Version: [3.0.8](https://github.com/3dem/relion/releases/tag/3.0.8)
 
-Base Image: [chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/cuda-9.2.openmpi-4.0.Dockerfile)
-
 Usage:
 
 ```shell
@@ -35,8 +33,6 @@ Main Page: [http://www.gromacs.org/](http://www.gromacs.org/)
 
 Version: [2020](http://manual.gromacs.org/2020/download.html)
 
-Base Image: [chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.cuda-10.2-openmpi4.0.Dockerfile)
-
 Usage:
 
 ```shell
@@ -53,10 +49,6 @@ singularity pull docker://chengshenggan/hpc-app-container:gromacs-2020
 Main Page: [https://lammps.sandia.gov/](https://lammps.sandia.gov/)
 
 Version: [stable_3Mar2020](https://github.com/lammps/lammps/releases/tag/stable_3Mar2020)
-
-Base Image for GPU: [chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.cuda-10.2.openmpi4.0.Dockerfile)
-
-Base Image for Intel: [chengshenggan/hpc-base-container:gcc-8.ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/dgx2/gcc-8.openmpi4.0.Dockerfile)
 
 Usage for GPU:
 
@@ -83,8 +75,6 @@ singularity pull docker://chengshenggan/hpc-app-container:lammps-intel-2020
 Main Page: [https://openfoam.org/](https://openfoam.org/)
 
 Version: [v8](https://openfoam.org/version/8)
-
-Base Image: [chengshenggan/hpc-base-container:ompi-4.0](https://github.com/Shenggan/hpc-base-container/blob/master/cascadelake-opa/openmpi-4.0.Dockerfile)
 
 Usage:
 
