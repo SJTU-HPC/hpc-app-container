@@ -1,16 +1,16 @@
-name: OpenFOAM
+name: openfoam-v8
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'openfoam/**'
+      - 'openfoam/openfoam-v8**'
   pull_request:
     branches: 
       - master
     paths:
-      - 'openfoam/**'
+      - 'openfoam/openfoam-v8**'
 
 env:
   OFOAM_IMAGE_NAME: openfoam-v8

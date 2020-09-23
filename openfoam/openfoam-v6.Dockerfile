@@ -13,7 +13,7 @@ RUN yum install -y \
     ln -s /usr/bin/cmake3 /usr/bin/cmake && \
     rm -rf /var/cache/yum/*
 
-# OpenFOAM v8
+# OpenFOAM v6
 RUN yum install -y \
         patch \
         flex \
@@ -24,15 +24,15 @@ RUN yum install -y \
         readline-devel \
         ncurses-devel && \
     rm -rf /var/cache/yum/*
-RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/8 | tar xz && \
-    mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/third-party/8 | tar xz && \
-    mv OpenFOAM-8-version-8 OpenFOAM-8 && mv ThirdParty-8-version-8 ThirdParty-8 && \
-    cd OpenFOAM-8 && \
+RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/6 | tar xz && \
+    mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/third-party/6 | tar xz && \
+    mv OpenFOAM-6-version-6 OpenFOAM-6 && mv ThirdParty-6-version-6 ThirdParty-6
+RUN cd /opt/ThirdParty-6 && rm -rf ./scotch_6.0.3 && \
+    wget https://gforge.inria.fr/frs/download.php/file/37622/scotch_6.0.6.tar.gz && \
+    tar xf ./scotch_6.0.6.tar.gz && mv ./scotch_6.0.6 ./scotch_6.0.3
+RUN source /opt/OpenFOAM-6/etc/bashrc && \
+    cd /opt/OpenFOAM-6 && \
     sed -i 's,FOAM_INST_DIR=$HOME\/$WM_PROJECT,FOAM_INST_DIR=/opt,g' etc/bashrc && \
-    sed -i 's/alias wmUnset/#alias wmUnset/' etc/config.sh/aliases && \
-    sed -i '77s/else/#else/' etc/config.sh/aliases && \
-    sed -i 's/unalias wmRefresh/#unalias wmRefresh/' etc/config.sh/aliases && \
-    source etc/bashrc && \
     ./Allwmake
 
 
@@ -52,7 +52,7 @@ RUN yum install -y \
     /bin/ln -s /bin/bash /bin/sh
 
 # OpenFOAM v8
-COPY --from=build /opt/OpenFOAM-8 /opt/OpenFOAM-8
-COPY --from=build /opt/ThirdParty-8/platforms /opt/ThirdParty-8/platforms
+COPY --from=build /opt/OpenFOAM-6 /opt/OpenFOAM-6
+COPY --from=build /opt/ThirdParty-6/platforms /opt/ThirdParty-6/platforms
 
-ENTRYPOINT [ "sh", "-c", ". /opt/OpenFOAM-8/etc/bashrc && \"$@\"", "-s" ]
+ENTRYPOINT [ "sh", "-c", ". /opt/OpenFOAM-6/etc/bashrc && \"$@\"", "-s" ]
