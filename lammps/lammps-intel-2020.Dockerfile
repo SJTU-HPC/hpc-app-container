@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:intel-2021 AS build
+FROM sjtuhpc/hpc-base-container:intel-2021 AS build
 
 RUN yum install -y \
         epel-release && \
@@ -46,7 +46,7 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:intel-2021
+FROM sjtuhpc/hpc-base-container:intel-2021
 
 # LAMMPS version stable_3Mar2020 for Intel Platform
 RUN yum install -y \

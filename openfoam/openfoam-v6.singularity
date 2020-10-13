@@ -1,5 +1,5 @@
 BootStrap: docker
-From: chengshenggan/hpc-base-container:ompi-4.0
+From: sjtuhpc/hpc-base-container:ompi-4.0
 Stage: build
 %post
     . /.singularity.d/env/10-docker*.sh
@@ -42,7 +42,7 @@ Stage: build
 
 
 BootStrap: docker
-From: chengshenggan/hpc-base-container:ompi-4.0
+From: sjtuhpc/hpc-base-container:ompi-4.0
 %post
     . /.singularity.d/env/10-docker*.sh
 

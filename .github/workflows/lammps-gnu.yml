@@ -1,6 +1,7 @@
 name: Lammps-gnu
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -32,7 +33,7 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
 
     steps:
       - uses: actions/checkout@v2

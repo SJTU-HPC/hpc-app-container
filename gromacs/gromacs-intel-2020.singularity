@@ -1,5 +1,5 @@
 BootStrap: docker
-From: chengshenggan/hpc-base-container:intel-2021
+From: sjtuhpc/hpc-base-container:intel-2021
 Stage: build
 %post
     . /.singularity.d/env/10-docker*.sh
@@ -41,7 +41,7 @@ Stage: build
 
 
 BootStrap: docker
-From: chengshenggan/hpc-base-container:intel-2021
+From: sjtuhpc/hpc-base-container:intel-2021
 %post
     . /.singularity.d/env/10-docker*.sh
 

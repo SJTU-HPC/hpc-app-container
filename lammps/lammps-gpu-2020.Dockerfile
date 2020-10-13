@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0 AS build
+FROM sjtuhpc/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0 AS build
 
 RUN yum install -y \
         epel-release && \
@@ -48,7 +48,7 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
+FROM sjtuhpc/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
 
 # LAMMPS version stable_3Mar2020 for CUDA compute capability sm70
 RUN yum install -y \

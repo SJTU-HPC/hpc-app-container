@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0 AS build
+FROM sjtuhpc/hpc-base-container:cuda-9.2.ompi-4.0 AS build
 
 # RELION version 3.0.8
 RUN yum install -y \
@@ -29,7 +29,7 @@ ENV LD_LIBRARY_PATH=/opt/relion/lib:$LD_LIBRARY_PATH \
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:cuda-9.2.ompi-4.0
+FROM sjtuhpc/hpc-base-container:cuda-9.2.ompi-4.0
 RUN yum install -y \
         which \
         libtiff-devel \

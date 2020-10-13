@@ -2,7 +2,7 @@
 # multi-stage: build
 #===========================#
 
-FROM chengshenggan/hpc-base-container:ompi-4.0 AS build
+FROM sjtuhpc/hpc-base-container:ompi-4.0 AS build
 
 RUN yum install -y \
         epel-release && \
@@ -40,7 +40,7 @@ RUN source /opt/OpenFOAM-6/etc/bashrc && \
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:ompi-4.0
+FROM sjtuhpc/hpc-base-container:ompi-4.0
 RUN yum install -y \
         zlib-devel \
         boost-system \

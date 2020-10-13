@@ -1,7 +1,7 @@
 #===========================#
 # multi-stage: build
 #===========================#
-FROM chengshenggan/hpc-base-container:intel-2021 AS build
+FROM sjtuhpc/hpc-base-container:intel-2021 AS build
 
 RUN yum install -y \
         epel-release && \
@@ -39,7 +39,7 @@ ENV LD_LIBRARY_PATH=/opt/gromacs/lib64:$LD_LIBRARY_PATH \
 # multi-stage: install
 #===========================#
 
-FROM chengshenggan/hpc-base-container:intel-2021
+FROM sjtuhpc/hpc-base-container:intel-2021
 
 # Gromacs version 2020
 COPY --from=build /opt/gromacs /opt/gromacs
