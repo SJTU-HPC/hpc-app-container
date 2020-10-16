@@ -1,0 +1,56 @@
+name: openfoam-gpu-dev
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'openfoam/openfoam-gpu**'
+  pull_request:
+    branches: 
+      - master
+    paths:
+      - 'openfoam/openfoam-gpu**'
+
+env:
+  OFOAM_IMAGE_NAME: openfoam-gpu-dev
+
+  DOCKERHUB_REPO: hpc-app-container
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+
+jobs:        
+  test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Build image
+        run: docker build . --file "openfoam/openfoam-gpu-dev.Dockerfile" --tag $OFOAM_IMAGE_NAME
+  
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file "openfoam/openfoam-gpu-dev.Dockerfile" --tag $OFOAM_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u $DOCKERHUB_USER --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$DOCKERHUB_USER/$DOCKERHUB_REPO
+          
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          VERSION=$OFOAM_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $OFOAM_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
