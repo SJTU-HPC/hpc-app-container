@@ -42,11 +42,18 @@ RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/8 | tar 
 
 FROM sjtuhpc/hpc-base-container:cuda-10.2.ompi-4.0
 RUN yum install -y \
+        epel-release && \
+    yum install -y \
+        cmake3 \
+        make \
+        wget \
+        git \
         zlib-devel \
         boost-system \
         boost-thread \
         readline-devel \
         ncurses-devel && \
+    ln -s /usr/bin/cmake3 /usr/bin/cmake && \
     rm -rf /var/cache/yum/* && \
     /bin/rm /bin/sh && \
     /bin/ln -s /bin/bash /bin/sh
