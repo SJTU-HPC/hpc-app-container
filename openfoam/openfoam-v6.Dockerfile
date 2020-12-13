@@ -24,12 +24,12 @@ RUN yum install -y \
         readline-devel \
         ncurses-devel && \
     rm -rf /var/cache/yum/*
-RUN mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/source/6 | tar xz && \
-    mkdir -p /opt && cd /opt && wget -O - http://dl.openfoam.org/third-party/6 | tar xz && \
-    mv OpenFOAM-6-version-6 OpenFOAM-6 && mv ThirdParty-6-version-6 ThirdParty-6
+RUN mkdir -p /opt && cd /opt && wget -O - https://github.com/OpenFOAM/OpenFOAM-6/archive/20190620.tar.gz | tar xz && \
+    mkdir -p /opt && cd /opt && wget -O - https://github.com/OpenFOAM/ThirdParty-6/archive/version-6.tar.gz | tar xz && \
+    mv OpenFOAM-6-20190620/ OpenFOAM-6 && mv ThirdParty-6-version-6 ThirdParty-6
 RUN cd /opt/ThirdParty-6 && rm -rf ./scotch_6.0.3 && \
     wget https://gforge.inria.fr/frs/download.php/file/37622/scotch_6.0.6.tar.gz && \
-    tar xf ./scotch_6.0.6.tar.gz && mv ./scotch_6.0.6 ./scotch_6.0.3
+    tar xf ./scotch_6.0.6.tar.gz
 RUN source /opt/OpenFOAM-6/etc/bashrc && \
     cd /opt/OpenFOAM-6 && \
     sed -i 's,FOAM_INST_DIR=$HOME\/$WM_PROJECT,FOAM_INST_DIR=/opt,g' etc/bashrc && \
