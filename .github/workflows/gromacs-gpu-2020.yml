@@ -1,4 +1,4 @@
-name: gromacs-gpu
+name: gromacs-gpu-2020
 
 on:
   workflow_dispatch:
@@ -6,12 +6,12 @@ on:
     branches:
       - master
     paths:
-      - 'gromacs/gromacs-gpu-**'
+      - 'gromacs/gromacs-gpu-2020**'
   pull_request:
     branches: 
       - master
     paths:
-      - 'gromacs/gromacs-gpu-**'
+      - 'gromacs/gromacs-gpu-2020**'
 
 env:
   GROMACS_IMAGE_NAME: gromacs-gpu-2020
