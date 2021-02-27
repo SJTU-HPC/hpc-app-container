@@ -1,0 +1,21 @@
+BootStrap: docker
+From: sjtuhpc/hpc-base-container:gcc-8.ompi-4.0
+
+%environment
+  export ROSETTA=/opt/rosetta_src_2020.08.61146_bundle
+  export ROSETTA3_DB=$ROSETTA/main/database
+  export ROSETTA_BIN=$ROSETTA/main/source/bin
+  export PATH=$PATH:$ROSETTA_BIN
+  export LD_LIBRARY_PATH=$ROSETTA/main/source/bin:$LD_LIBRARY_PATH
+
+%post
+  yum install -y boost-devel boost boost-doc
+
+%post
+  cd /opt
+  wget https://www.rosettacommons.org/downloads/academic/3.12/rosetta_src_3.12_bundle.tgz --password=${ROSETTA_PASSWORD} --user=Academic_User
+  tar zxvf rosetta_src_*
+  rm -rf rosetta_src_3.12_bundle.tgz
+  cd $ROSETTA/main/source/
+  ./scons.py mode=release bin extras=mpi
+  ls $ROSETTA_BIN | grep .linux > /app_entry
