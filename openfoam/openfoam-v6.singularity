@@ -52,6 +52,7 @@ From: sjtuhpc/hpc-base-container:ompi-4.0
         zlib-devel \
         boost-system \
         boost-thread \
+        gsl-devel \
         readline-devel \
         ncurses-devel
     rm -rf /var/cache/yum/*

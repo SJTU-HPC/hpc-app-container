@@ -46,6 +46,7 @@ RUN yum install -y \
         boost-system \
         boost-thread \
         readline-devel \
+        gsl-devel \
         ncurses-devel && \
     rm -rf /var/cache/yum/* && \
     /bin/rm /bin/sh && \
