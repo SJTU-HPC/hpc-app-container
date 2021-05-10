@@ -24,4 +24,4 @@ RUN mkdir hypre_install &&\
     cmake .. &&\
     make install &&\
     cd .. &&\
-    make test &&\
+    make test 
