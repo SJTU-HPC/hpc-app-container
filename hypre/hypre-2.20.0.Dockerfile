@@ -1,4 +1,4 @@
-From: sjtuhpc/hpc-base-container:gcc-8.ompi-4.0 AS build
+From sjtuhpc/hpc-base-container:gcc-8.ompi-4.0 AS build
 
 # cmake 
 RUN
